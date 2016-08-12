@@ -45,4 +45,8 @@ public class ContactActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
 }
