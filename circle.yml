@@ -1,16 +1,6 @@
-#machine:
-  #environment:
-    #ADB_INSTALL_TIMEOUT: 80
-    #GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
 
-#general:
-  #branches:
-    #only:
-    #  - master # list of branches to build
-
-  artifacts:
+artifacts:
       - ./app/build/outputs/apk/
-     # - ./app/build/outputs/reports/androidTests/connected/
 
 dependencies:
    pre:
@@ -20,14 +10,5 @@ dependencies:
 
 test:
    override:
-      #- ./gradlew clean test assembleRelease -PdisablePreDex -i -s -Pcom.android.build.threadPoolSize=1 -Dorg.gradle.parallel=false -Dorg.gradle.jvmargs="-Xms512m -Xmx512m" -Dorg.gradle.daemon=false
        - (./gradlew clean assembleRelease):
          timeout: 360
-
-#deployment:
-   #production:
-      #branch: master
-      #commands:
-       #  - ./gradlew crashlyticsUploadDistributionDevRelease
-       #  - ./gradlew crashlyticsUploadDistributionProdRelease
-       #  - scripts/publish_artifacts.sh
