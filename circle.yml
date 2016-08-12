@@ -18,3 +18,10 @@ test:
   override:
     - if [ -e ./gradlew ]; then ./gradlew assembleDebug -PdisablePreDex;else gradle assembleDebug -PdisablePreDex;fi
     - cp -r app/build/outputs $CIRCLE_ARTIFACTS
+
+
+deployment:
+   production:
+      branch: master
+      commands:
+         - ./gradlew crashlyticsUploadDistributionRelease
