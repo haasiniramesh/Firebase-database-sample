@@ -7,5 +7,4 @@ dependencies:
 
 test:
    override:
-       - (./gradlew clean assembleRelease):
-         timeout: 360
+       - ./gradlew clean assembleRelease
