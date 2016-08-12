@@ -7,6 +7,14 @@ machine:
   java:
         version: openjdk8
 
+
+general:
+  branches:
+    only:
+      - master # list of branches to build
+  artifacts:
+      - ./app/build/outputs/apk/
+
     
 dependencies:
    pre:
@@ -17,11 +25,11 @@ dependencies:
 test:
   override:
     - if [ -e ./gradlew ]; then ./gradlew assembleDebug -PdisablePreDex;else gradle assembleDebug -PdisablePreDex;fi
-    - cp -r app/build/outputs $CIRCLE_ARTIFACTS
+    #- cp -r app/build/outputs $CIRCLE_ARTIFACTS
 
 
 deployment:
    production:
       branch: master
       commands:
-         - ./gradlew crashlyticsUploadDistributionRelease
+         - ./gradlew crashlyticsUploadDistributionDevRelease
