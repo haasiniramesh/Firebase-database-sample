@@ -3,7 +3,7 @@
     #ADB_INSTALL_TIMEOUT: 80
     #GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
 
-general:
+#general:
   #branches:
     #only:
     #  - master # list of branches to build
