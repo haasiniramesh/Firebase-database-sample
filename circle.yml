@@ -1,7 +1,4 @@
 
-artifacts:
-      - ./app/build/outputs/apk/
-
 dependencies:
    pre:
       - echo y | android update sdk --no-ui --all --filter "tools"
