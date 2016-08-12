@@ -3,7 +3,6 @@
 buildscript {
     repositories {
         jcenter()
-        //maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.1.2'
@@ -12,9 +11,6 @@ buildscript {
         // in the individual module build.gradle files
 
         classpath 'com.google.gms:google-services:3.0.0'
-
-        // The Fabric Gradle plugin uses an open ended version to react
-        //classpath 'io.fabric.tools:gradle:1.+'
     }
 }
 

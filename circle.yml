@@ -1,8 +1,35 @@
+machine:
+  environment:
+    ANDROID_HOME: /usr/local/android-sdk-linux
+    PATH: "~/$CIRCLE_PROJECT_REPONAME/gradle-2.14.1/bin:$PATH"
+    TERM: "dumb"
+    ADB_INSTALL_TIMEOUT: "10"
+  java:
+        version: openjdk8
 
+
+general:
+  branches:
+    only:
+      - master # list of branches to build
+  artifacts:
+      - ./app/build/outputs/apk/
+
+    
 dependencies:
    pre:
-      - echo y | android update sdk --no-ui --all --filter "tools",platform-tools,build-tools-24.0.0,android-4,extra-google-m2repository,extra-google-google_play_services,extra-android-support
+        - wget "https://services.gradle.org/distributions/gradle-2.14.1-bin.zip"; unzip gradle-2.14.1-bin.zip
+        - ( sleep 5 && while [ 1 ]; do sleep 1; echo y; done ) | android update sdk --no-ui --all --filter tools,platform-tools,android-24,extra-google-m2repository,extra-google-google_play_services,extra-android-support,extra-android-m2repository
+        - echo y | android update sdk --no-ui --all --filter build-tools-24.0.1
 
 test:
-   override:
-       - ./gradlew clean assembleRelease -PdisablePreDex -i -s -Pcom.android.build.threadPoolSize=1 -Dorg.gradle.parallel=false -Dorg.gradle.jvmargs="-Xms512m -Xmx512m" -Dorg.gradle.daemon=false
+  override:
+    - if [ -e ./gradlew ]; then ./gradlew assembleDebug -PdisablePreDex;else gradle assembleDebug -PdisablePreDex;fi
+    #- cp -r app/build/outputs $CIRCLE_ARTIFACTS
+
+
+deployment:
+   production:
+      branch: master
+      commands:
+         - ./gradlew crashlyticsUploadDistributionDevRelease
