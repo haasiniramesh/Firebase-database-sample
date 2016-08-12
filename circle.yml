@@ -16,5 +16,5 @@ dependencies:
 
 test:
   override:
-    - if [ -e ./gradlew ]; then ./gradlew test assembleDebug connectedAndroidTest -PdisablePreDex;else gradle test assembleDebug connectedAndroidTest -PdisablePreDex;fi
+    - if [ -e ./gradlew ]; then ./gradlew assembleDebug -PdisablePreDex;else gradle assembleDebug -PdisablePreDex;fi
     - cp -r app/build/outputs $CIRCLE_ARTIFACTS
