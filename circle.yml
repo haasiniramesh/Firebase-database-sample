@@ -7,4 +7,4 @@ dependencies:
 
 test:
    override:
-       - ./gradlew clean assembleRelease
+       - ./gradlew clean assembleDebug
